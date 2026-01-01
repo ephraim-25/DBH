@@ -196,7 +196,7 @@ export default function Secteurs() {
                                             </div>
 
                                             <Link
-                                                href={`/services`}
+                                                href={sector.id === "dbh-academy" ? "/dbh-academy" : sector.id === "fayila-digital-hub" ? "/fayila-digital-hub" : "/services"}
                                                 className="inline-flex items-center gap-2 text-[#03C9A9] hover:text-[#04E7C4] transition-colors text-sm font-medium"
                                             >
                                                 En savoir plus

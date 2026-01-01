@@ -15,37 +15,41 @@ import {
 import { BsRobot, BsLightning, BsGear, BsCpu } from "react-icons/bs";
 import { GiFarmTractor, GiSolarPower } from "react-icons/gi";
 
-const sectors = [
-  {
-    icon: GiFarmTractor,
+{
+  icon: GiFarmTractor,
     title: "AgriTech",
-    description: "Agriculture intelligente avec AgriConnectDRC et Dark Food",
-    color: "#03C9A9"
-  },
-  {
-    icon: HiOutlineAcademicCap,
+      description: "Agriculture intelligente avec AgriConnectDRC et Dark Food",
+        color: "#03C9A9",
+          href: "/secteurs#dark-food"
+},
+{
+  icon: HiOutlineAcademicCap,
     title: "Éducation",
-    description: "Formation et EdTech via DBH Academy et E-Classroom",
-    color: "#04E7C4"
-  },
-  {
-    icon: BsCpu,
+      description: "Formation et EdTech via DBH Academy et E-Classroom",
+        color: "#04E7C4",
+          href: "/dbh-academy"
+},
+{
+  icon: BsCpu,
     title: "Intelligence Artificielle",
-    description: "Solutions IA avec Masolo, Makita et DBH AI Lab",
-    color: "#03C9A9"
-  },
-  {
-    icon: HiOutlineAcademicCap,
+      description: "Solutions IA avec Masolo, Makita et DBH AI Lab",
+        color: "#03C9A9",
+          href: "/secteurs#dbh-ai-lab"
+},
+{
+  icon: HiOutlineAcademicCap,
     title: "FayilaDigitalHub",
-    description: "Hub d'innovation, incubation et accélération de startups tech",
-    color: "#03C9A9"
-  },
-  {
-    icon: GiSolarPower,
+      description: "Hub d'innovation, incubation et accélération de startups tech",
+        color: "#03C9A9",
+          href: "/fayila-digital-hub"
+},
+{
+  icon: GiSolarPower,
     title: "Énergie",
-    description: "Énergie verte avec Dark Sale Batteries",
-    color: "#04E7C4"
-  }
+      description: "Énergie verte avec Dark Sale Batteries",
+        color: "#04E7C4",
+          href: "/secteurs#dark-sale"
+}
 ];
 
 const metrics = [
@@ -216,20 +220,22 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="card group cursor-pointer"
+                className="card group cursor-pointer hover:border-[#03C9A9] transition-all"
               >
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all group-hover:scale-110"
-                  style={{ background: `linear-gradient(135deg, ${sector.color}20, ${sector.color}10)` }}
-                >
-                  <sector.icon className="text-2xl" style={{ color: sector.color }} />
-                </div>
-                <h3 className="font-['Poppins'] font-semibold text-xl text-white mb-3">
-                  {sector.title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {sector.description}
-                </p>
+                <Link href={sector.href} className="block h-full">
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all group-hover:scale-110"
+                    style={{ background: `linear-gradient(135deg, ${sector.color}20, ${sector.color}10)` }}
+                  >
+                    <sector.icon className="text-2xl" style={{ color: sector.color }} />
+                  </div>
+                  <h3 className="font-['Poppins'] font-semibold text-xl text-white mb-3">
+                    {sector.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    {sector.description}
+                  </p>
+                </Link>
               </motion.div>
             ))}
           </div>
