@@ -10,6 +10,7 @@ const navLinks = [
     { href: "/", label: "Accueil" },
     { href: "/a-propos", label: "À propos" },
     { href: "/secteurs", label: "Secteurs" },
+    { href: "/dbh-academy", label: "Academy" },
     { href: "/services", label: "Services" },
     { href: "/partenariats", label: "Partenariats" },
     { href: "/blog", label: "Blog" },
