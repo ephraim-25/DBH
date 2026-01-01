@@ -6,50 +6,51 @@ import {
   HiOutlineSparkles,
   HiOutlineAcademicCap,
   HiOutlineLightBulb,
-  HiOutlineGlobeAlt,
+
   HiOutlineChartBar,
   HiOutlineUsers,
   HiOutlineOfficeBuilding,
   HiArrowRight
 } from "react-icons/hi";
-import { BsRobot, BsLightning, BsGear, BsCpu } from "react-icons/bs";
+import { BsRobot, BsCpu } from "react-icons/bs";
 import { GiFarmTractor, GiSolarPower } from "react-icons/gi";
 
-{
-  icon: GiFarmTractor,
+const sectors = [
+  {
+    icon: GiFarmTractor,
     title: "AgriTech",
-      description: "Agriculture intelligente avec AgriConnectDRC et Dark Food",
-        color: "#03C9A9",
-          href: "/secteurs#dark-food"
-},
-{
-  icon: HiOutlineAcademicCap,
+    description: "Agriculture intelligente avec AgriConnectDRC et Dark Food",
+    color: "#03C9A9",
+    href: "/secteurs#dark-food"
+  },
+  {
+    icon: HiOutlineAcademicCap,
     title: "Éducation",
-      description: "Formation et EdTech via DBH Academy et E-Classroom",
-        color: "#04E7C4",
-          href: "/dbh-academy"
-},
-{
-  icon: BsCpu,
+    description: "Formation et EdTech via DBH Academy et E-Classroom",
+    color: "#04E7C4",
+    href: "/dbh-academy"
+  },
+  {
+    icon: BsCpu,
     title: "Intelligence Artificielle",
-      description: "Solutions IA avec Masolo, Makita et DBH AI Lab",
-        color: "#03C9A9",
-          href: "/secteurs#dbh-ai-lab"
-},
-{
-  icon: HiOutlineAcademicCap,
+    description: "Solutions IA avec Masolo, Makita et DBH AI Lab",
+    color: "#03C9A9",
+    href: "/secteurs#dbh-ai-lab"
+  },
+  {
+    icon: HiOutlineAcademicCap,
     title: "FayilaDigitalHub",
-      description: "Hub d'innovation, incubation et accélération de startups tech",
-        color: "#03C9A9",
-          href: "/fayila-digital-hub"
-},
-{
-  icon: GiSolarPower,
+    description: "Hub d'innovation, incubation et accélération de startups tech",
+    color: "#03C9A9",
+    href: "/fayila-digital-hub"
+  },
+  {
+    icon: GiSolarPower,
     title: "Énergie",
-      description: "Énergie verte avec Dark Sale Batteries",
-        color: "#04E7C4",
-          href: "/secteurs#dark-sale"
-}
+    description: "Énergie verte avec Dark Sale Batteries",
+    color: "#04E7C4",
+    href: "/secteurs#dark-sale"
+  }
 ];
 
 const metrics = [
