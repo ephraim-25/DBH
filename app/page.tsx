@@ -35,6 +35,12 @@ const sectors = [
     color: "#03C9A9"
   },
   {
+    icon: HiOutlineAcademicCap,
+    title: "FayilaDigitalHub",
+    description: "Hub d'innovation, incubation et accélération de startups tech",
+    color: "#03C9A9"
+  },
+  {
     icon: GiSolarPower,
     title: "Énergie",
     description: "Énergie verte avec Dark Sale Batteries",
@@ -131,7 +137,7 @@ export default function Home() {
             {/* Subheading */}
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10">
               Dark Business Hi-Tech transforme l&apos;Afrique à travers des solutions innovantes
-              en IA, AgriTech, Énergie et Éducation.
+              en IA, AgriTech, Énergie, Éducation et Incubation de startups.
             </p>
 
             {/* CTA Buttons */}

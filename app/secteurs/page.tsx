@@ -27,6 +27,15 @@ const sectors = [
         color: "#04E7C4"
     },
     {
+        id: "fayila-digital-hub",
+        icon: HiOutlineSparkles,
+        title: "FayilaDigitalHub",
+        subtitle: "Innovation Hub",
+        description: "Incubateur et accélérateur de startups technologiques. Nous transformons les idées en entreprises durables.",
+        features: ["Incubation", "Co-working", "Accès financement"],
+        color: "#03C9A9"
+    },
+    {
         id: "agriconnect",
         icon: GiFarmTractor,
         title: "AgriConnectDRC",

@@ -37,6 +37,7 @@ const subjects = [
     "Demande d'information",
     "Partenariat",
     "Investissement",
+    "Je veux rejoindre FayilaDigitalHub",
     "Rejoindre DBH Academy",
     "Support technique",
     "Autre"

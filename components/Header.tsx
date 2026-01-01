@@ -32,16 +32,20 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-[#0B0C10]/95 backdrop-blur-lg shadow-lg"
-                    : "bg-transparent"
+                ? "bg-[#0B0C10]/95 backdrop-blur-lg shadow-lg"
+                : "bg-transparent"
                 }`}
         >
             <div className="container mx-auto px-6">
                 <nav className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group">
-                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#03C9A9] to-[#04E7C4] flex items-center justify-center font-bold text-[#0B0C10] text-lg group-hover:shadow-[0_0_20px_rgba(3,201,169,0.5)] transition-shadow">
-                            DBH
+                        <div className="relative w-12 h-12">
+                            <img
+                                src="/dbh-logo.png"
+                                alt="DBH Logo"
+                                className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+                            />
                         </div>
                         <div className="hidden sm:block">
                             <span className="font-['Poppins'] font-bold text-white text-lg">

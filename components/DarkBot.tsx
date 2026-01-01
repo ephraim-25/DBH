@@ -22,6 +22,7 @@ const greetings: Record<string, string> = {
 const quickReplies = [
     { text: "Découvrir nos solutions", action: "solutions" },
     { text: "Devenir partenaire", action: "partner" },
+    { text: "FayilaDigitalHub", action: "hub" },
     { text: "Rejoindre DBH Academy", action: "academy" },
     { text: "Contacter l'équipe", action: "contact" },
 ];
@@ -29,6 +30,7 @@ const quickReplies = [
 const botResponses: Record<string, string> = {
     solutions: "Dark Business Hi-Tech propose des solutions innovantes en IA, AgriTech, Énergie, et Éducation. Nos projets phares incluent AgriConnectDRC, DBH Academy, E-Classroom, SOMA, et Masolo. Souhaitez-vous en savoir plus sur un projet spécifique ?",
     partner: "Excellent choix ! DBH collabore avec des institutions, des entreprises privées et des universités. Vous pouvez nous contacter à contact@darkbusinesshitech.com ou visiter notre page Partenariats pour découvrir les opportunités de collaboration.",
+    hub: "FayilaDigitalHub est notre incubateur et accélérateur de startups. Nous offrons formation, mentorat et accès au financement pour les entrepreneurs tech. Voulez-vous postuler ?",
     academy: "DBH Academy forme la nouvelle génération de talents en IA et technologies. Nous avons déjà formé plus de 200 jeunes ! Visitez notre page Secteurs pour en savoir plus sur nos programmes de formation.",
     contact: "Vous pouvez nous joindre par email à contact@darkbusinesshitech.com, par téléphone au +243 000 000 000, ou visiter notre bureau à Gombe, Avenue de la Justice, Kinshasa. Préférez-vous que je vous mette en contact directement ?",
     default: "Je vous remercie pour votre message. Pour une assistance personnalisée, je vous invite à contacter notre équipe à contact@darkbusinesshitech.com. Y a-t-il autre chose que je puisse faire pour vous ?",
@@ -219,8 +221,8 @@ export default function DarkBot() {
                                 >
                                     <div
                                         className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${message.sender === "user"
-                                                ? "bg-gradient-to-r from-[#03C9A9] to-[#04E7C4] text-[#0B0C10] rounded-br-sm"
-                                                : "bg-[#0F2540] text-gray-200 rounded-bl-sm"
+                                            ? "bg-gradient-to-r from-[#03C9A9] to-[#04E7C4] text-[#0B0C10] rounded-br-sm"
+                                            : "bg-[#0F2540] text-gray-200 rounded-bl-sm"
                                             }`}
                                     >
                                         {message.text}

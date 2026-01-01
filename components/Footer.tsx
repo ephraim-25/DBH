@@ -41,9 +41,13 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {/* Brand Column */}
                     <div className="lg:col-span-1">
-                        <Link href="/" className="flex items-center gap-3 mb-6">
-                            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#03C9A9] to-[#04E7C4] flex items-center justify-center font-bold text-[#0B0C10] text-xl">
-                                DBH
+                        <Link href="/" className="flex items-center gap-3 mb-6 group">
+                            <div className="relative w-14 h-14">
+                                <img
+                                    src="/dbh-logo.png"
+                                    alt="DBH Logo"
+                                    className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+                                />
                             </div>
                             <div>
                                 <span className="font-['Poppins'] font-bold text-white text-lg block">

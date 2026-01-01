@@ -6,7 +6,7 @@ import Link from "next/link";
 import { HiArrowRight, HiOutlineSparkles, HiOutlineNewspaper, HiOutlinePlay } from "react-icons/hi";
 import { BsCalendar, BsTag, BsYoutube } from "react-icons/bs";
 
-const categories = ["Tous", "Actualités", "Innovation", "Éducation", "IA", "Économie"];
+const categories = ["Tous", "Actualités", "Innovation", "FayilaDigitalHub", "Éducation", "IA", "Économie"];
 
 const articles = [
     {
@@ -121,8 +121,8 @@ export default function Blog() {
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
                                 className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === category
-                                        ? "bg-gradient-to-r from-[#03C9A9] to-[#04E7C4] text-[#0B0C10]"
-                                        : "bg-[#0F2540]/50 text-gray-400 hover:text-white hover:bg-[#0F2540]"
+                                    ? "bg-gradient-to-r from-[#03C9A9] to-[#04E7C4] text-[#0B0C10]"
+                                    : "bg-[#0F2540]/50 text-gray-400 hover:text-white hover:bg-[#0F2540]"
                                     }`}
                             >
                                 {category}

@@ -43,6 +43,12 @@ const services = [
         features: ["Formations IA", "Bootcamps", "Certifications", "Corporate training"]
     },
     {
+        icon: HiOutlineSparkles,
+        title: "Incubation & Accompagnement",
+        description: "Via FayilaDigitalHub, nous transformons les idées en startups viables. Coaching, ressources techniques et accès au financement.",
+        features: ["Incubation", "Accélération", "Mentoring", "Funding access"]
+    },
+    {
         icon: BsCode,
         title: "Développement Logiciel",
         description: "Conception et développement d'applications web et mobiles modernes. Du MVP au produit mature.",

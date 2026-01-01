@@ -14,9 +14,9 @@ const partnershipTypes = [
     },
     {
         icon: BsGraphUp,
-        title: "Partenariats Entrepreneuriaux",
-        description: "Collaboration avec le secteur privé pour développer des solutions innovantes et scalables.",
-        examples: ["Startups tech", "PME", "Grandes entreprises"]
+        title: "Partenariats Innovation",
+        description: "Collaboration avec startups et incubateurs via FayilaDigitalHub pour co-créer les solutions de demain.",
+        examples: ["Startups tech", "Incubateurs", "Fonds VC"]
     },
     {
         icon: BsBook,

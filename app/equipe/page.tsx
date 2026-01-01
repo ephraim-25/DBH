@@ -45,6 +45,14 @@ const leadership = [
         bio: "Stratégie de communication et relations publiques pour promouvoir la vision de DBH.",
         linkedin: "#",
         featured: false
+    },
+    {
+        name: "À définir",
+        role: "Head of FayilaDigitalHub",
+        initials: "HUB",
+        bio: "Direction de l'incubateur et développement de l'écosystème startup.",
+        linkedin: "#",
+        featured: false
     }
 ];
 
@@ -52,6 +60,7 @@ const divisions = [
     { name: "DBH Academy", lead: "À confirmer", focus: "Formation & Éducation" },
     { name: "Dark Food", lead: "À confirmer", focus: "AgroTech & Distribution" },
     { name: "DBH AI Lab", lead: "À confirmer", focus: "R&D Intelligence Artificielle" },
+    { name: "FayilaDigitalHub", lead: "À confirmer", focus: "Incubation & Startups" },
     { name: "Dark Sale Batteries", lead: "À confirmer", focus: "Énergie Verte" }
 ];
 
