@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { HiArrowRight, HiOutlineSparkles, HiOutlineLightBulb, HiOutlineHeart, HiOutlineGlobeAlt, HiOutlineUsers, HiOutlineAcademicCap } from "react-icons/hi";
-import { BsRocket, BsTrophy, BsAward } from "react-icons/bs";
+import { HiArrowRight, HiOutlineSparkles, HiOutlineLightBulb, HiOutlineHeart, HiOutlineGlobeAlt, HiOutlineUsers } from "react-icons/hi";
+import { BsRocket, BsTrophy } from "react-icons/bs";
 
 const values = [
     {
@@ -192,6 +192,60 @@ export default function APropos() {
                                         des solutions innovantes qui transforment aujourd&apos;hui des secteurs clés de l&apos;économie congolaise.
                                     </p>
                                 </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Ecosystem Strategy */}
+            <section className="section bg-[#0F2540]/10">
+                <div className="container mx-auto px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="max-w-4xl mx-auto text-center"
+                    >
+                        <h2 className="section-title text-white mb-8">
+                            Notre <span className="text-gradient">Écosystème</span> Intégré
+                        </h2>
+                        <div className="bg-[#0B0C10] border border-[#03C9A9]/20 rounded-2xl p-8 md:p-10 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-[#03C9A9]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+                            <div className="relative z-10 space-y-6 text-left">
+                                <p className="text-gray-300 leading-relaxed text-lg">
+                                    Chez Dark Business Hi-Tech, nous ne créons pas seulement des entreprises, nous bâtissons un <span className="text-[#03C9A9] font-semibold">cycle vertueux d&apos;innovation</span>.
+                                </p>
+                                <ul className="space-y-4">
+                                    <li className="flex items-start gap-4">
+                                        <div className="w-8 h-8 rounded-full bg-[#03C9A9]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                            <span className="text-[#03C9A9] font-bold">1</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-white font-semibold mb-1">Formation de l&apos;Élite</h4>
+                                            <p className="text-gray-400 text-sm">Via <span className="text-white">DBH Academy</span>, nous formons les talents locaux aux technologies de pointe (IA, Cloud, Dév).</p>
+                                        </div>
+                                    </li>
+                                    <li className="flex items-start gap-4">
+                                        <div className="w-8 h-8 rounded-full bg-[#03C9A9]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                            <span className="text-[#03C9A9] font-bold">2</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-white font-semibold mb-1">Incubation & Création</h4>
+                                            <p className="text-gray-400 text-sm">Ces talents alimentent notre incubateur <span className="text-white">FayilaDigitalHub</span> et rejoignent nos startups (Dark Food, Dark Sale, etc.).</p>
+                                        </div>
+                                    </li>
+                                    <li className="flex items-start gap-4">
+                                        <div className="w-8 h-8 rounded-full bg-[#03C9A9]/20 flex items-center justify-center flex-shrink-0 mt-1">
+                                            <span className="text-[#03C9A9] font-bold">3</span>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-white font-semibold mb-1">Impact Réel</h4>
+                                            <p className="text-gray-400 text-sm">Nos solutions résolvent des problèmes concrets (Agriculture, Énergie) et génèrent des ressources pour former la prochaine génération.</p>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </motion.div>

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { HiArrowRight, HiOutlineSparkles } from "react-icons/hi";
-import { GiFarmTractor, GiSolarPower, GiTeacher, GiArtificialIntelligence } from "react-icons/gi";
+import { GiFarmTractor, GiSolarPower, GiTeacher, GiArtificialIntelligence, GiPaintBrush } from "react-icons/gi";
 import { BsRobot, BsCpu, BsGear, BsCarFront, BsChatDots, BsPeople, BsLightbulb } from "react-icons/bs";
 import { HiOutlineAcademicCap } from "react-icons/hi";
 
@@ -34,6 +34,15 @@ const sectors = [
         description: "Incubateur et accélérateur de startups technologiques. Nous transformons les idées en entreprises durables.",
         features: ["Incubation", "Co-working", "Accès financement"],
         color: "#03C9A9"
+    },
+    {
+        id: "wazi-agency",
+        icon: GiPaintBrush,
+        title: "Wazi Agency",
+        subtitle: "Branding Stratégique",
+        description: "Agence de branding et storytelling stratégique. Nous construisons des marques fortes pour les startups et institutions africaines innovantes.",
+        features: ["Identité Visuelle", "Direction Artistique", "Storytelling"],
+        color: "#FFD700"
     },
     {
         id: "agriconnect",
@@ -196,7 +205,7 @@ export default function Secteurs() {
                                             </div>
 
                                             <Link
-                                                href={sector.id === "dbh-academy" ? "/dbh-academy" : sector.id === "fayila-digital-hub" ? "/fayila-digital-hub" : "/services"}
+                                                href={sector.id === "dbh-academy" ? "/dbh-academy" : sector.id === "fayila-digital-hub" ? "/fayila-digital-hub" : sector.id === "wazi-agency" ? "/wazi-agency" : "/services"}
                                                 className="inline-flex items-center gap-2 text-[#03C9A9] hover:text-[#04E7C4] transition-colors text-sm font-medium"
                                             >
                                                 En savoir plus

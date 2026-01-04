@@ -24,16 +24,18 @@ const quickReplies = [
     { text: "Devenir partenaire", action: "partner" },
     { text: "FayilaDigitalHub", action: "hub" },
     { text: "Rejoindre DBH Academy", action: "academy" },
+    { text: "Branding & Design", action: "wazi" },
     { text: "Contacter l'équipe", action: "contact" },
 ];
 
 const botResponses: Record<string, string> = {
     solutions: "Dark Business Hi-Tech propose des solutions innovantes en IA, AgriTech, Énergie, et Éducation. Nos projets phares incluent AgriConnectDRC, DBH Academy, E-Classroom, SOMA, et Masolo. Souhaitez-vous en savoir plus sur un projet spécifique ?",
     partner: "Excellent choix ! DBH collabore avec des institutions, des entreprises privées et des universités. Vous pouvez nous contacter à contact@darkbusinesshitech.com ou visiter notre page Partenariats pour découvrir les opportunités de collaboration.",
-    hub: "FayilaDigitalHub est notre incubateur et accélérateur de startups. Nous offrons formation, mentorat et accès au financement pour les entrepreneurs tech. Voulez-vous postuler ?",
-    academy: "DBH Academy forme la nouvelle génération de talents en IA et technologies. Nous avons déjà formé plus de 200 jeunes ! Visitez notre page Secteurs pour en savoir plus sur nos programmes de formation.",
+    hub: "FayilaDigitalHub est notre incubateur et accélérateur de startups. Nous offrons formation, mentorat et accès au financement pour les entrepreneurs tech. C'est ici que naissent les futures licornes congolaises !",
+    academy: "DBH Academy est le cœur de notre écosystème de formation. Nous offrons des cursus en Développement Web, Data Science et Intelligence Artificielle. Nos étudiants travaillent sur des projets réels et peuvent rejoindre nos startups après leur formation. 🎓",
+    wazi: "Wazi Agency est notre agence de branding stratégique et creative direction. Nous aidons les marques africaines à gagner en clarté et en impact grâce à un storytelling puissant et un design panafricain moderne.",
     contact: "Vous pouvez nous joindre par email à contact@darkbusinesshitech.com, par téléphone au +243 000 000 000, ou visiter notre bureau à Gombe, Avenue de la Justice, Kinshasa. Préférez-vous que je vous mette en contact directement ?",
-    default: "Je vous remercie pour votre message. Pour une assistance personnalisée, je vous invite à contacter notre équipe à contact@darkbusinesshitech.com. Y a-t-il autre chose que je puisse faire pour vous ?",
+    default: "Je vous remercie pour votre message. Pour une assistance personnalisée, je vous invite à contacter notre équipe à contact@darkbusinesshitech.com. Y a-t-il autre chose que je puisse faire pour vous ? (Vous pouvez me poser des questions sur l'Académie, nos Solutions ou nos Partenariats)",
 };
 
 export default function DarkBot() {
@@ -55,18 +57,21 @@ export default function DarkBot() {
     // Initialize greeting
     useEffect(() => {
         if (isOpen && messages.length === 0) {
-            setIsTyping(true);
-            setTimeout(() => {
-                setMessages([
-                    {
-                        id: "greeting",
-                        text: greetings[language],
-                        sender: "bot",
-                        timestamp: new Date(),
-                    },
-                ]);
-                setIsTyping(false);
-            }, 800);
+            const timer = setTimeout(() => {
+                setIsTyping(true);
+                setTimeout(() => {
+                    setMessages([
+                        {
+                            id: "greeting",
+                            text: greetings[language],
+                            sender: "bot",
+                            timestamp: new Date(),
+                        },
+                    ]);
+                    setIsTyping(false);
+                }, 800);
+            }, 100);
+            return () => clearTimeout(timer);
         }
     }, [isOpen, messages.length, language]);
 
@@ -80,11 +85,12 @@ export default function DarkBot() {
         if (!messageText) return;
 
         // Add user message
+        const timestamp = new Date();
         const userMessage: Message = {
-            id: Date.now().toString(),
+            id: timestamp.getTime().toString(),
             text: messageText,
             sender: "user",
-            timestamp: new Date(),
+            timestamp: timestamp,
         };
         setMessages((prev) => [...prev, userMessage]);
         setInputValue("");
@@ -92,14 +98,24 @@ export default function DarkBot() {
         // Simulate bot response
         setIsTyping(true);
         setTimeout(() => {
-            const responseKey = Object.keys(botResponses).find((key) =>
-                messageText.toLowerCase().includes(key)
-            );
+            const lowerText = messageText.toLowerCase();
+
+            // Enhanced Intent Matching
+            let responseKey = "default";
+
+            if (lowerText.includes("solution") || lowerText.includes("projet") || lowerText.includes("service")) responseKey = "solutions";
+            else if (lowerText.includes("partenair") || lowerText.includes("collab")) responseKey = "partner";
+            else if (lowerText.includes("hub") || lowerText.includes("fayila") || lowerText.includes("incubat")) responseKey = "hub";
+            else if (lowerText.includes("academ") || lowerText.includes("cour") || lowerText.includes("form") || lowerText.includes("apprend")) responseKey = "academy";
+            else if (lowerText.includes("design") || lowerText.includes("brand") || lowerText.includes("logo") || lowerText.includes("wazi") || lowerText.includes("marketing")) responseKey = "wazi";
+            else if (lowerText.includes("contact") || lowerText.includes("email") || lowerText.includes("tel") || lowerText.includes("où")) responseKey = "contact";
+
+            const botTimestamp = new Date();
             const botMessage: Message = {
-                id: (Date.now() + 1).toString(),
-                text: botResponses[responseKey || "default"],
+                id: botTimestamp.getTime().toString(),
+                text: botResponses[responseKey],
                 sender: "bot",
-                timestamp: new Date(),
+                timestamp: botTimestamp,
             };
             setMessages((prev) => [...prev, botMessage]);
             setIsTyping(false);

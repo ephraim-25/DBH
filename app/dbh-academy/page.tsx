@@ -43,7 +43,7 @@ const pedagogy = [
     { text: "70% Pratique / 30% Théorie" },
     { text: "Projets réels DBH" },
     { text: "Coaching & Mentorat" },
-    { text: "Travail en équipe" }
+    { text: "Travail en équipe" },
 ];
 
 export default function DBHAcademy() {

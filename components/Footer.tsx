@@ -14,6 +14,7 @@ const sectors = [
     { href: "/dbh-academy", label: "DBH Academy" },
     { href: "/secteurs#agriconnect", label: "AgriConnectDRC" },
     { href: "/secteurs#dark-sale", label: "Dark Sale Batteries" },
+    { href: "/wazi-agency", label: "Wazi Agency" },
     { href: "/secteurs#dbh-ai-lab", label: "DBH AI Lab" },
 ];
 

@@ -9,7 +9,7 @@ const leadership = [
     {
         name: "Ephraim YABA MBUKU",
         role: "Fondateur & CEO",
-        initials: "EYM",
+        initials: "YM",
         bio: "Visionnaire et entrepreneur passionné, Ephraim a fondé DBH avec la conviction que l'Afrique peut être à l'avant-garde de la révolution IA.",
         linkedin: "#",
         featured: true
@@ -23,12 +23,12 @@ const leadership = [
         featured: true
     },
     {
-        name: "À définir",
+        name: "Rachel Fayila",
         role: "COO",
-        initials: "COO",
+        initials: "RF",
         bio: "Responsable des opérations et de l'optimisation des processus à travers toutes les divisions de DBH.",
         linkedin: "#",
-        featured: false
+        featured: true
     },
     {
         name: "À définir",
@@ -39,12 +39,12 @@ const leadership = [
         featured: false
     },
     {
-        name: "À définir",
-        role: "Directeur Communication",
-        initials: "DC",
+        name: "Robin Monga",
+        role: "Directrice de Communication",
+        initials: "RM",
         bio: "Stratégie de communication et relations publiques pour promouvoir la vision de DBH.",
         linkedin: "#",
-        featured: false
+        featured: true
     },
     {
         name: "À définir",
@@ -57,7 +57,7 @@ const leadership = [
 ];
 
 const divisions = [
-    { name: "DBH Academy", lead: "À confirmer", focus: "Formation & Éducation" },
+    { name: "DBH Academy", lead: "Simeon", focus: "Formation & Éducation" },
     { name: "Dark Food", lead: "À confirmer", focus: "AgroTech & Distribution" },
     { name: "DBH AI Lab", lead: "À confirmer", focus: "R&D Intelligence Artificielle" },
     { name: "FayilaDigitalHub", lead: "À confirmer", focus: "Incubation & Startups" },
