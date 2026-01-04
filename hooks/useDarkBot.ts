@@ -81,7 +81,7 @@ export function useDarkBot() {
                 path: window.location.pathname
             };
 
-            botKnowledge.forEach(intent => {
+            botKnowledge.forEach((intent: Intent) => {
                 const score = calculateScore(text, intent);
                 if (score > maxScore) {
                     maxScore = score;
@@ -98,7 +98,7 @@ export function useDarkBot() {
                 text: botResponseText,
                 sender: "bot",
                 timestamp: new Date(),
-                relatedActions: bestIntent?.relatedActions
+                relatedActions: bestIntent ? bestIntent.relatedActions : undefined
             };
 
             setMessages(prev => [...prev, botMsg]);
