@@ -1,145 +1,47 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BsRobot, BsSend, BsX, BsMic, BsGlobe } from "react-icons/bs";
+import { BsRobot, BsSend, BsX, BsMic, BsTrash } from "react-icons/bs";
 import { HiSparkles } from "react-icons/hi2";
+import { useDarkBot } from "../hooks/useDarkBot";
+import { useEffect, useRef } from "react";
 
-interface Message {
-    id: string;
-    text: string;
-    sender: "user" | "bot";
-    timestamp: Date;
-}
-
-const greetings: Record<string, string> = {
-    fr: "Bonjour ! Je suis DarkBot, l'assistant virtuel de Dark Business Hi-Tech. Comment puis-je vous aider aujourd'hui ?",
-    ln: "Mbote ! Nazali DarkBot, mosungi ya Dark Business Hi-Tech. Nakoki kosalisa yo ndenge nini lelo ?",
-    sw: "Jambo! Mimi ni DarkBot, msaidizi wa Dark Business Hi-Tech. Nawezaje kukusaidia leo?",
-    ts: "Moyo! Meme ndi DarkBot, wa ku Dark Business Hi-Tech. Ndi nga ku ku thusa bya njani lelo?",
-};
-
-const quickReplies = [
-    { text: "Découvrir nos solutions", action: "solutions" },
-    { text: "Devenir partenaire", action: "partner" },
-    { text: "FayilaDigitalHub", action: "hub" },
-    { text: "Rejoindre DBH Academy", action: "academy" },
-    { text: "Branding & Design", action: "wazi" },
-    { text: "Contacter l'équipe", action: "contact" },
-];
-
-const botResponses: Record<string, string> = {
-    solutions: "Dark Business Hi-Tech propose des solutions innovantes en IA, AgriTech, Énergie, et Éducation. Nos projets phares incluent AgriConnectDRC, DBH Academy, E-Classroom, SOMA, et Masolo. Souhaitez-vous en savoir plus sur un projet spécifique ?",
-    partner: "Excellent choix ! DBH collabore avec des institutions, des entreprises privées et des universités. Vous pouvez nous contacter à contact@darkbusinesshitech.com ou visiter notre page Partenariats pour découvrir les opportunités de collaboration.",
-    hub: "FayilaDigitalHub est notre incubateur et accélérateur de startups. Nous offrons formation, mentorat et accès au financement pour les entrepreneurs tech. C'est ici que naissent les futures licornes congolaises !",
-    academy: "DBH Academy est le cœur de notre écosystème de formation. Nous offrons des cursus en Développement Web, Data Science et Intelligence Artificielle. Nos étudiants travaillent sur des projets réels et peuvent rejoindre nos startups après leur formation. 🎓",
-    wazi: "Wazi Agency est notre agence de branding stratégique et creative direction. Nous aidons les marques africaines à gagner en clarté et en impact grâce à un storytelling puissant et un design panafricain moderne.",
-    contact: "Vous pouvez nous joindre par email à contact@darkbusinesshitech.com, par téléphone au +243 000 000 000, ou visiter notre bureau à Gombe, Avenue de la Justice, Kinshasa. Préférez-vous que je vous mette en contact directement ?",
-    default: "Je vous remercie pour votre message. Pour une assistance personnalisée, je vous invite à contacter notre équipe à contact@darkbusinesshitech.com. Y a-t-il autre chose que je puisse faire pour vous ? (Vous pouvez me poser des questions sur l'Académie, nos Solutions ou nos Partenariats)",
+// Simple message parser for bold text and newlines
+const parseMessage = (text: string) => {
+    return text.split('\n').map((line, i) => (
+        <p key={i} className="mb-1 last:mb-0">
+            {line.split(/(\*\*.*?\*\*)/).map((part, j) => {
+                if (part.startsWith('**') && part.endsWith('**')) {
+                    return <strong key={j} className="text-[#03C9A9]">{part.slice(2, -2)}</strong>;
+                }
+                return part;
+            })}
+        </p>
+    ));
 };
 
 export default function DarkBot() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [inputValue, setInputValue] = useState("");
-    const [isTyping, setIsTyping] = useState(false);
-    const [language, setLanguage] = useState<"fr" | "ln" | "sw" | "ts">("fr");
-    const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+    const {
+        isOpen,
+        setIsOpen,
+        messages,
+        inputValue,
+        setInputValue,
+        isTyping,
+        processMessage,
+        clearHistory
+    } = useDarkBot();
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
-
-    // Listen for external open events
-    useEffect(() => {
-        const handleOpen = () => setIsOpen(true);
-        window.addEventListener("openDarkBot", handleOpen);
-        return () => window.removeEventListener("openDarkBot", handleOpen);
-    }, []);
-
-    // Initialize greeting
-    useEffect(() => {
-        if (isOpen && messages.length === 0) {
-            const timer = setTimeout(() => {
-                setIsTyping(true);
-                setTimeout(() => {
-                    setMessages([
-                        {
-                            id: "greeting",
-                            text: greetings[language],
-                            sender: "bot",
-                            timestamp: new Date(),
-                        },
-                    ]);
-                    setIsTyping(false);
-                }, 800);
-            }, 100);
-            return () => clearTimeout(timer);
-        }
-    }, [isOpen, messages.length, language]);
 
     // Auto-scroll to bottom
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
+    }, [messages, isTyping]);
 
-    const handleSend = (text?: string) => {
-        const messageText = text || inputValue.trim();
-        if (!messageText) return;
-
-        // Add user message
-        const timestamp = new Date();
-        const userMessage: Message = {
-            id: timestamp.getTime().toString(),
-            text: messageText,
-            sender: "user",
-            timestamp: timestamp,
-        };
-        setMessages((prev) => [...prev, userMessage]);
-        setInputValue("");
-
-        // Simulate bot response
-        setIsTyping(true);
-        setTimeout(() => {
-            const lowerText = messageText.toLowerCase();
-
-            // Enhanced Intent Matching
-            let responseKey = "default";
-
-            if (lowerText.includes("solution") || lowerText.includes("projet") || lowerText.includes("service")) responseKey = "solutions";
-            else if (lowerText.includes("partenair") || lowerText.includes("collab")) responseKey = "partner";
-            else if (lowerText.includes("hub") || lowerText.includes("fayila") || lowerText.includes("incubat")) responseKey = "hub";
-            else if (lowerText.includes("academ") || lowerText.includes("cour") || lowerText.includes("form") || lowerText.includes("apprend")) responseKey = "academy";
-            else if (lowerText.includes("design") || lowerText.includes("brand") || lowerText.includes("logo") || lowerText.includes("wazi") || lowerText.includes("marketing")) responseKey = "wazi";
-            else if (lowerText.includes("contact") || lowerText.includes("email") || lowerText.includes("tel") || lowerText.includes("où")) responseKey = "contact";
-
-            const botTimestamp = new Date();
-            const botMessage: Message = {
-                id: botTimestamp.getTime().toString(),
-                text: botResponses[responseKey],
-                sender: "bot",
-                timestamp: botTimestamp,
-            };
-            setMessages((prev) => [...prev, botMessage]);
-            setIsTyping(false);
-        }, 1200);
-    };
-
-    const handleQuickReply = (action: string) => {
-        const reply = quickReplies.find((r) => r.action === action);
-        if (reply) {
-            handleSend(reply.text);
-        }
-    };
-
-    const changeLanguage = (lang: "fr" | "ln" | "sw" | "ts") => {
-        setLanguage(lang);
-        setShowLanguageMenu(false);
-        setMessages([
-            {
-                id: "greeting-new",
-                text: greetings[lang],
-                sender: "bot",
-                timestamp: new Date(),
-            },
-        ]);
+    const handleSend = () => {
+        if (!inputValue.trim()) return;
+        processMessage(inputValue.trim());
     };
 
     return (
@@ -187,39 +89,16 @@ export default function DarkBot() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
-                                {/* Language Selector */}
-                                <div className="relative">
-                                    <button
-                                        onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                                        className="p-2 text-gray-400 hover:text-[#03C9A9] transition-colors"
-                                        aria-label="Changer de langue"
-                                    >
-                                        <BsGlobe className="text-lg" />
-                                    </button>
-                                    {showLanguageMenu && (
-                                        <div className="absolute right-0 top-full mt-2 bg-[#0F2540] rounded-lg shadow-lg border border-[#03C9A9]/20 overflow-hidden min-w-[120px]">
-                                            {[
-                                                { code: "fr", label: "Français" },
-                                                { code: "ln", label: "Lingala" },
-                                                { code: "sw", label: "Swahili" },
-                                                { code: "ts", label: "Tshiluba" },
-                                            ].map((lang) => (
-                                                <button
-                                                    key={lang.code}
-                                                    onClick={() => changeLanguage(lang.code as "fr" | "ln" | "sw" | "ts")}
-                                                    className={`w-full px-4 py-2 text-left text-sm hover:bg-[#03C9A9]/10 transition-colors ${language === lang.code ? "text-[#03C9A9]" : "text-gray-300"
-                                                        }`}
-                                                >
-                                                    {lang.label}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
+                                <button
+                                    onClick={clearHistory}
+                                    className="p-2 text-gray-400 hover:text-red-400 transition-colors"
+                                    title="Effacer la conversation"
+                                >
+                                    <BsTrash />
+                                </button>
                                 <button
                                     onClick={() => setIsOpen(false)}
                                     className="p-2 text-gray-400 hover:text-white transition-colors"
-                                    aria-label="Fermer"
                                 >
                                     <BsX className="text-2xl" />
                                 </button>
@@ -228,21 +107,43 @@ export default function DarkBot() {
 
                         {/* Messages */}
                         <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                            {messages.length === 0 && (
+                                <div className="text-center text-gray-500 text-sm mt-10">
+                                    <BsRobot className="text-4xl mx-auto mb-3 opacity-20" />
+                                    <p>Posez-moi une question sur<br />Dark Business Hi-Tech !</p>
+                                </div>
+                            )}
+
                             {messages.map((message) => (
                                 <motion.div
                                     key={message.id}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
+                                    className={`flex flex-col ${message.sender === "user" ? "items-end" : "items-start"}`}
                                 >
                                     <div
                                         className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${message.sender === "user"
-                                            ? "bg-gradient-to-r from-[#03C9A9] to-[#04E7C4] text-[#0B0C10] rounded-br-sm"
-                                            : "bg-[#0F2540] text-gray-200 rounded-bl-sm"
+                                                ? "bg-gradient-to-r from-[#03C9A9] to-[#04E7C4] text-[#0B0C10] rounded-br-sm"
+                                                : "bg-[#0F2540] text-gray-200 rounded-bl-sm"
                                             }`}
                                     >
-                                        {message.text}
+                                        {parseMessage(message.text)}
                                     </div>
+
+                                    {/* Related Actions (Quick Replies) */}
+                                    {message.relatedActions && (
+                                        <div className="flex flex-wrap gap-2 mt-2 max-w-[85%]">
+                                            {message.relatedActions.map((action, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => processMessage(action.text)}
+                                                    className="px-3 py-1.5 text-xs bg-[#0F2540] text-[#03C9A9] rounded-full border border-[#03C9A9]/20 hover:bg-[#03C9A9]/10 transition-colors"
+                                                >
+                                                    {action.text}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
                                 </motion.div>
                             ))}
 
@@ -261,23 +162,6 @@ export default function DarkBot() {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Quick Replies */}
-                        {messages.length <= 1 && !isTyping && (
-                            <div className="px-4 pb-2">
-                                <div className="flex flex-wrap gap-2">
-                                    {quickReplies.map((reply) => (
-                                        <button
-                                            key={reply.action}
-                                            onClick={() => handleQuickReply(reply.action)}
-                                            className="px-3 py-1.5 text-xs bg-[#0F2540] text-[#03C9A9] rounded-full border border-[#03C9A9]/20 hover:bg-[#03C9A9]/10 transition-colors"
-                                        >
-                                            {reply.text}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
                         {/* Input */}
                         <div className="p-4 border-t border-[#03C9A9]/10">
                             <div className="flex items-center gap-2 bg-[#0F2540] rounded-full px-4 py-2">
@@ -286,20 +170,18 @@ export default function DarkBot() {
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     onKeyPress={(e) => e.key === "Enter" && handleSend()}
-                                    placeholder="Écrivez votre message..."
+                                    placeholder="Posez votre question..."
                                     className="flex-1 bg-transparent text-white text-sm placeholder-gray-500 focus:outline-none"
                                 />
                                 <button
                                     className="p-2 text-gray-400 hover:text-[#03C9A9] transition-colors"
-                                    aria-label="Microphone"
                                 >
                                     <BsMic className="text-lg" />
                                 </button>
                                 <button
-                                    onClick={() => handleSend()}
+                                    onClick={handleSend}
                                     disabled={!inputValue.trim()}
                                     className="p-2 text-[#03C9A9] hover:text-[#04E7C4] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                    aria-label="Envoyer"
                                 >
                                     <BsSend className="text-lg" />
                                 </button>
